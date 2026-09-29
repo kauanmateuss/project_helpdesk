@@ -3,6 +3,8 @@
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\TicketController;
+
 // Rota da pagina inicial Home
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
@@ -18,3 +20,7 @@ Route::get('/chamado/{id}', function($id) {
     return "Detalhes do chamado #{$id}";
 
 });
+
+
+// registrando rota resource para o controller ticket
+Route::resource('tickets', TicketController::class);
