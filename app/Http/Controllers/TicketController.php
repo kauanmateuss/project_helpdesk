@@ -24,7 +24,7 @@ class TicketController extends Controller
      */
     public function create()
     {
-        return view('tickets.create');
+        return view('tickets.create');  // Mostra a página com formulário
     }
 
     /**
@@ -35,7 +35,7 @@ class TicketController extends Controller
         $data = $request->validated();
         $data['user_id'] = auth()->id() ?? 1;
 
-        \App\Models\Ticket::create($data);
+        \App\Models\Ticket::create($data);  // Cria o novo chamado no banco de dados
 
         return redirect()->route('tickets.index')->with('sucesso', 'Chamado criado com sucesso');
     }
@@ -48,7 +48,7 @@ class TicketController extends Controller
         $ticket = \App\Models\Ticket::with(['user', 'assignee', 'comments.user'])
             ->findOrFail($id);  // Se não encontrar recorna o erro 404
 
-        return view('tickets.show', compact('ticket'));
+        return view('tickets.show', compact('ticket'));  // vai para a pagina de mostrar o registro ticket
     }
 
     /**
@@ -58,7 +58,7 @@ class TicketController extends Controller
     {
         $ticket = \App\Models\Ticket::findOrFail($id);
 
-        return view('tickets.edit', compact('ticket'));
+        return view('tickets.edit', compact('ticket'));  // Vai para o formulário de edição do chamado
     }
 
     /**
