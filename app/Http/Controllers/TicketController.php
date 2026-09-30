@@ -38,7 +38,7 @@ class TicketController extends Controller
     public function store(StoreTicketRequest $request)
     {
         // Criando o ticket com o usuário logado
-        $ticket = auth()->user()->tickets()->create($request->validate());
+        $ticket = auth()->user()->tickets()->create($request->validated());
         
         // QUando criado, redireciona para a pagina show
         return redirect()
