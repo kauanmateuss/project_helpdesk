@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreTicketRequest;
 use App\Http\Requests\UpdateTicketRequest;
+use App\Models\Ticket;
 use Illuminate\Http\Request;
 
 class TicketController extends Controller
@@ -14,7 +15,10 @@ class TicketController extends Controller
     public function index()
     {
         // Exibir todos os tickets, com paginação e ordenados do mais recente para o mais antigo
-        $tickets = \App\Models\Ticket::with('user')->latest()->paginate(10);
+        $tickets = Ticket::where('user_id', auth()->id())
+            ->with('user')
+            ->latest()
+            ->paginate(10);
 
         return view('tickets.index', compact('tickets'));
     }
@@ -32,12 +36,13 @@ class TicketController extends Controller
      */
     public function store(StoreTicketRequest $request)
     {
-        $data = $request->validated();
-        $data['user_id'] = auth()->id() ?? 1;
-
-        \App\Models\Ticket::create($data);  // Cria o novo chamado no banco de dados
-
-        return redirect()->route('tickets.index')->with('sucesso', 'Chamado criado com sucesso');
+        // Criando o ticket com o usuário logado
+        $ticket = auth()->user()->tickets()->create($request->validate());
+        
+        // QUando criado, redireciona para a pagina show
+        return redirect()
+            ->route('tickets.show', $ticket)
+            ->with('sucesso', 'Chamado criado com sucesso');
     }
 
     /**
@@ -45,8 +50,6 @@ class TicketController extends Controller
      */
     public function show(string $id)
     {
-        $ticket = \App\Models\Ticket::with(['user', 'assignee', 'comments.user'])
-            ->findOrFail($id);  // Se não encontrar recorna o erro 404
 
         return view('tickets.show', compact('ticket'));  // vai para a pagina de mostrar o registro ticket
     }
@@ -56,31 +59,31 @@ class TicketController extends Controller
      */
     public function edit(string $id)
     {
-        $ticket = \App\Models\Ticket::findOrFail($id);
-
+    
         return view('tickets.edit', compact('ticket'));  // Vai para o formulário de edição do chamado
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateTicketRequest $request, string $id)
+    public function update(UpdateTicketRequest $request, Ticket $ticket)
     {
-        $ticket = \App\Models\Ticket::findOrFail($id);
         $ticket->update($request->validated());
 
-        return redirect()->route('tickets.show', $ticket)->with('sucesso', 'Chamado atualizado');
+        return redirect()
+            ->route('tickets.show', $ticket)
+            ->with('sucesso', 'Chamado atualizado');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Ticket $ticket)
     {
-        // pegando o id no banco
-        $ticket = \App\Models\Ticket::findOrFail($id);
-        $ticket->delete();
+        $ticket->destory();
 
-        return redirect()->route('tickets.index')->with('sucesso', 'Chamado Removido');
+        return redirect()
+            ->route('tickets.index')
+            ->with('sucesso', 'Chamado Removido');
     }
 }
