@@ -6,7 +6,6 @@ use App\Http\Requests\StoreTicketRequest;
 use App\Http\Requests\UpdateTicketRequest;
 use App\Models\Ticket;
 use Illuminate\Support\Facades\Gate;
-use Illuminate\Http\Request;
 
 class TicketController extends Controller
 {
@@ -39,7 +38,7 @@ class TicketController extends Controller
     {
         // Criando o ticket com o usuário logado
         $ticket = auth()->user()->tickets()->create($request->validated());
-        
+
         // QUando criado, redireciona para a pagina show
         return redirect()
             ->route('tickets.show', $ticket)
@@ -62,6 +61,7 @@ class TicketController extends Controller
     public function edit(Ticket $ticket)
     {
         Gate::authorize('update', $ticket);
+
         return view('tickets.edit', compact('ticket'));  // Vai para o formulário de edição do chamado
     }
 
@@ -74,7 +74,7 @@ class TicketController extends Controller
         $ticket->update($request->validated());
 
         return redirect()
-            ->route('tickets.show', $ticket)
+            ->route('tickets.index')
             ->with('sucesso', 'Chamado atualizado');
     }
 

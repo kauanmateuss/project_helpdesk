@@ -26,12 +26,13 @@ class UpdateTicketRequest extends FormRequest
             'title' => ['required', 'string', 'max:255'],
             'description' => ['required', 'string', 'min:10'],
             'category' => ['required', 'in:geral,hardware,software,rede'],
-            'priority' => ['required', 'string', 'in:baixa, media, alta, urgente'],
-        
+            'priority' => ['required', 'string', 'in:baixa,media,alta,urgente'],
+
         ];
     }
 
-    public function messages(): array {
+    public function messages(): array
+    {
         return [
             'title.required' => 'O titulo é obrigatorio',
             'description.required' => 'A descricao é obrigatoria',
