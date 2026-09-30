@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreTicketRequest;
 use App\Http\Requests\UpdateTicketRequest;
 use App\Models\Ticket;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
 
 class TicketController extends Controller
@@ -48,8 +49,9 @@ class TicketController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Ticket $ticket)
     {
+        Gate::authorize('view', $ticket);
 
         return view('tickets.show', compact('ticket'));  // vai para a pagina de mostrar o registro ticket
     }
@@ -57,9 +59,9 @@ class TicketController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Ticket $ticket)
     {
-    
+        Gate::authorize('update', $ticket);
         return view('tickets.edit', compact('ticket'));  // Vai para o formulário de edição do chamado
     }
 
@@ -68,6 +70,7 @@ class TicketController extends Controller
      */
     public function update(UpdateTicketRequest $request, Ticket $ticket)
     {
+        Gate::authorize('update', $ticket);
         $ticket->update($request->validated());
 
         return redirect()
@@ -80,6 +83,7 @@ class TicketController extends Controller
      */
     public function destroy(Ticket $ticket)
     {
+        Gate::authorize('delete', $ticket);
         $ticket->destory();
 
         return redirect()

@@ -12,7 +12,7 @@ class UpdateTicketRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
+        return $this->user()->can('update', $this->route('ticket'));
     }
 
     /**
@@ -25,7 +25,7 @@ class UpdateTicketRequest extends FormRequest
         return [
             'title' => ['required', 'string', 'max:255'],
             'description' => ['required', 'string', 'min:10'],
-            'category' => ['required', 'string', 'max:50'],
+            'category' => ['required', 'in:geral,hardware,software,rede'],
             'priority' => ['required', 'string', 'in:baixa, media, alta, urgente'],
         
         ];
