@@ -17,6 +17,14 @@
                     Sobre
                 </a>
             </li>
+
+            <li>
+                <a href="{{ route('tickets.index') }}"
+                class="{{ request()->routeIs('tickets.*') ? 'text-blue-600 font-semibold' : 'hover:text-blue-600' }}">
+                    Chamados
+                </a>
+            </li>
+
         </ul>
     </div>
 </nav>
