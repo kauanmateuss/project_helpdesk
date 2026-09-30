@@ -84,7 +84,7 @@ class TicketController extends Controller
     public function destroy(Ticket $ticket)
     {
         Gate::authorize('delete', $ticket);
-        $ticket->destory();
+        $ticket->delete();
 
         return redirect()
             ->route('tickets.index')
