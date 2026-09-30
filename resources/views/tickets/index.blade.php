@@ -2,7 +2,7 @@
 
 @section('titulo', 'CHAMADOS - HELP DESK')
 
-@section('conteudo')
+@section('content')
     @if (session('sucesso'))
         <div class="bg-green-100 border border-green-400 text-green-800 px-4 py-3 rounded mb-4">
             {{ session('sucesso') }}

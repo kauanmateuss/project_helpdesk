@@ -2,7 +2,7 @@
 
 @section('titulo', 'NOVO CHAMADO')
 
-@section('conteudo')
+@section('content')
     <h1 class="text-3xl font-bold text-gray-800 mb-6">➕ Novo Chamado</h1>
 
     <form action="{{ route('tickets.store') }}" method="POST"

@@ -4,7 +4,7 @@
 @section('titulo', 'HOME - HELP DESK')
 
 <!-- Vai substituir o yield conteudo no layout app pelo pela sessao abaixo -->
-@section('conteudo')
+@section('content')
     <h1 class="text-3xl font-bold text-gray-800">🛠️ {{ $titulo }}</h1>
     <p class="text-gray-600 mt-2">{{ $subtitulo }}</p>
 

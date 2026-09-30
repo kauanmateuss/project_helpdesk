@@ -2,7 +2,7 @@
 
 @section('titulo', 'Editar Chamado')
 
-@section('conteudo')
+@section('content')
     <h1 class="text-3xl font-bold text-gray-800 mb-6">✏️ Editar Chamado #{{ $ticket->id }}</h1>
 
     <form action="{{ route('tickets.update', $ticket) }}" method="POST"

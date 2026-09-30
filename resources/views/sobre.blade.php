@@ -2,7 +2,7 @@
 
 @section('titulo', 'SOBRE - HELP DESK')
 
-@section('conteudo')
+@section('content')
     <h1 class="text-3xl font-bold text-gray-800">Sobre o projeto</h1>
 
     <div class="mt-4 bg-white rounded shadow p-6">
