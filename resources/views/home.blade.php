@@ -1,10 +1,10 @@
-@extends('layouts.app')
+@extends('layouts.main')
 
 <!-- Essa secao vai substituir o titulo por HOME - HELP DESK  que tá no layout app-->
 @section('titulo', 'HOME - HELP DESK')
 
 <!-- Vai substituir o yield conteudo no layout app pelo pela sessao abaixo -->
-@section('content')
+@section('conteudo')
     <h1 class="text-3xl font-bold text-gray-800">🛠️ {{ $titulo }}</h1>
     <p class="text-gray-600 mt-2">{{ $subtitulo }}</p>
 

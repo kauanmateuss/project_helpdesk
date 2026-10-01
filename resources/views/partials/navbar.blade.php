@@ -19,9 +19,9 @@
             </li>
 
             <li>
-                <a href="{{ route('tickets.index') }}"
+                <a href="{{ route('dashboard') }}"
                 class="{{ request()->routeIs('tickets.*') ? 'text-blue-600 font-semibold' : 'hover:text-blue-600' }}">
-                    Chamados
+                    Login
                 </a>
             </li>
 
