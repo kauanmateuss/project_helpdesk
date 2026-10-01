@@ -2,7 +2,7 @@
 
 @section('titulo', $ticket->title)
 
-@section('conteudo')
+@section('content')
     <a href="{{ route('tickets.index') }}" class="text-blue-600 hover:underline">← Voltar</a>
 
     <div class="bg-white rounded shadow p-6 mt-4">

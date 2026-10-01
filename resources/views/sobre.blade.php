@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.main')
 
 @section('titulo', 'SOBRE - HELP DESK')
 

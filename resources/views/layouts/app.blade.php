@@ -1,27 +1,39 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Posso alterar o conteudo do titulo por causa do yield() -->
-    <title>@yield('titulo', 'HELP DESK')</title>
-    
-    <!-- Para melhorar o desenvolvimento do design -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
+    <title>@yield('titulo', 'Help Desk')</title>
+
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="bg-gray-100 min-h-screen">
+<body class="font-sans antialiased bg-gray-100 min-h-screen">
 
-    <!-- Vou incluir a view do navbar abaixo com o include() -->
-    @include('partials.navbar')
+    @include('layouts.navigation')
 
-    <main class="container mx-auto px-4 py-8">
-        @yield('conteudo')
+    {{-- Cabeçalho opcional (usado nas views como @section('header')) --}}
+    @hasSection('header')
+        <header class="bg-white shadow">
+            <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                @yield('header')
+            </div>
+        </header>
+    @endif
+
+    <main class="py-6">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            @if (session('sucesso'))
+                <div class="bg-green-100 border border-green-400 text-green-800 px-4 py-3 rounded mb-4">
+                    {{ session('sucesso') }}
+                </div>
+            @endif
+
+            @yield('content')
+        </div>
     </main>
 
-    <footer class="text-center text-gray-500 text-sm py-6">
-        Help Desk &copy; {{ date('Y') }}
-    </footer>
-
-
+    @stack('scripts')
 </body>
 </html>

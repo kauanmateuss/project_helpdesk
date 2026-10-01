@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.main')
 
 <!-- Essa secao vai substituir o titulo por HOME - HELP DESK  que tá no layout app-->
 @section('titulo', 'HOME - HELP DESK')
