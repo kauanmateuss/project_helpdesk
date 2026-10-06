@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Route;
 
 
 // Rotas publicas
-Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('welcome');
 Route::get('/sobre', [HomeController::class, 'sobre'])->name('sobre');
 
 

@@ -14,7 +14,7 @@ class HomeController extends Controller
         $totalChamados = 0;
         
         # retornando uma lista chaves valores
-        return view('home', [
+        return view('welcome', [
             'titulo' => $titulo,
             'subtitulo' => $subtitulo,
             'totalChamados' => $totalChamados,

@@ -15,7 +15,7 @@
         </p>
     </div>
 
-    <a href="{{ route('home') }}"
+    <a href="{{ route('welcome') }}"
        class="inline-block mt-6 text-blue-600 hover:underline">
         ← Voltar para home
     </a>

@@ -52,6 +52,8 @@ class TicketController extends Controller
     {
         Gate::authorize('view', $ticket);
 
+        $ticket->load(['user', 'assignee', 'comments.user']);
+
         return view('tickets.show', compact('ticket'));  // vai para a pagina de mostrar o registro ticket
     }
 
