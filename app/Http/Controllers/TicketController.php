@@ -15,10 +15,13 @@ class TicketController extends Controller
     public function index()
     {
         // Exibir todos os tickets, com paginação e ordenados do mais recente para o mais antigo
-        $tickets = Ticket::where('user_id', auth()->id())
-            ->with('user')
-            ->latest()
-            ->paginate(10);
+        // $tickets = Ticket::where('user_id', auth()->id())
+        //     ->with('user')
+        //     ->latest()
+        //     ->paginate(10);
+
+        // retornando como orientado por igor
+        $tickets = auth()->user()->tickets()->with('user')->latest()->paginate(10);
 
         return view('tickets.index', compact('tickets'));
     }
