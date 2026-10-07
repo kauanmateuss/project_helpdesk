@@ -39,8 +39,9 @@ class TicketController extends Controller
      */
     public function store(StoreTicketRequest $request)
     {
+        $data = $request->validated();
         // Criando o ticket com o usuário logado
-        $ticket = auth()->user()->tickets()->create($request->validated());
+        $ticket = auth()->user()->tickets()->create($data);
 
         // QUando criado, redireciona para a pagina show
         return redirect()
@@ -53,6 +54,7 @@ class TicketController extends Controller
      */
     public function show(Ticket $ticket)
     {
+        // verifica se o usuário é autorizado a ver esse ticket
         Gate::authorize('view', $ticket);
 
         $ticket->load(['user', 'assignee', 'comments.user']);
