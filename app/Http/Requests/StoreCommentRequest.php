@@ -13,7 +13,8 @@ class StoreCommentRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return $this->user() !== null;
+        // Autorizando o usuário que fez a request
+        return $this->user()->can('view', $this->route('ticket'));
     }
 
     /**
