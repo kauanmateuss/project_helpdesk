@@ -4,7 +4,6 @@ namespace App\Policies;
 
 use App\Models\Ticket;
 use App\Models\User;
-use Illuminate\Auth\Access\Response;
 
 class TicketPolicy
 {
@@ -20,7 +19,7 @@ class TicketPolicy
      * Determine whether the user can view the model.
      */
     public function view(User $user, Ticket $ticket): bool
-    {   
+    {
         // pode listar, se for o usuário logado ou se esse usuario tiver relacão com o chamado em questao
         return $user->id === $ticket->user_id || $user->id === $ticket->assigned_to;
     }

@@ -9,7 +9,8 @@ use Illuminate\Support\Facades\Gate;
 
 class CommentController extends Controller
 {
-    public function store(StoreCommentRequest $request, Ticket $ticket) {
+    public function store(StoreCommentRequest $request, Ticket $ticket)
+    {
         $ticket->comments()->create([
             'user_id' => auth()->id(),
             'body' => $request->validated('body'),
@@ -20,8 +21,8 @@ class CommentController extends Controller
             ->with('sucesso', 'Comentário Adicionado');
     }
 
-
-    public function destroy(Comment $comment) {
+    public function destroy(Comment $comment)
+    {
         // só o autor pode deletar
         Gate::authorize('delete', $comment);
 

@@ -20,17 +20,20 @@ class Ticket extends Model
     ];
 
     // relacionamento, um ticket pertence a um user(quem abriu o ticket)
-    public function user() {
+    public function user()
+    {
         return $this->belongsTo(User::class);
     }
 
     // relacionamento onde um ticket pode estar relacionado a um admin
-    public function assignee() {
+    public function assignee()
+    {
         return $this->belongsTo(User::class, 'assigned_to');
     }
 
     // relacionamento onde um ticket tem vários comentários
-    public function comments() {
+    public function comments()
+    {
         return $this->hasMany(Comment::class);
     }
 }

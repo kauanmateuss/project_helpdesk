@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use App\Enums\TicketCategory;
 use App\Enums\TicketPriority;
+use App\Models\Ticket;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
@@ -15,7 +16,7 @@ class StoreTicketRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return $this->user()->can('create', \App\Models\Ticket::class);
+        return $this->user()->can('create', Ticket::class);
     }
 
     /**
@@ -35,8 +36,8 @@ class StoreTicketRequest extends FormRequest
         ];
     }
 
-
-    public function messages(): array {
+    public function messages(): array
+    {
         return [
             'title.required' => 'O titulo é obrigatorio',
             'description.required' => 'A descricao é obrigatoria',

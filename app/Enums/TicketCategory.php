@@ -2,7 +2,8 @@
 
 namespace App\Enums;
 
-enum TicketCategory: string {
+enum TicketCategory: string
+{
     case Geral = 'geral';
     case Hardware = 'hardware';
     case Software = 'software';

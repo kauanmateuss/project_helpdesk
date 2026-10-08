@@ -6,11 +6,9 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TicketController;
 use Illuminate\Support\Facades\Route;
 
-
 // Rotas publicas
 Route::get('/', [HomeController::class, 'index'])->name('welcome');
 Route::get('/sobre', [HomeController::class, 'sobre'])->name('sobre');
-
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -19,7 +17,6 @@ Route::get('/sobre', [HomeController::class, 'sobre'])->name('sobre');
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
 // })->middleware(['auth', 'verified'])->name('dashboard');
-
 
 // Rotas autenticadas
 Route::middleware(['auth', 'verified'])->group(function () {

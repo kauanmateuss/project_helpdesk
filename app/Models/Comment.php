@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Comment extends Model
 {
-
     use HasFactory;
 
     protected $fillable = [
@@ -17,12 +16,14 @@ class Comment extends Model
     ];
 
     // relacionamento do comentário com um ticket
-    public function ticket() {
+    public function ticket()
+    {
         return $this->BelongsTo(Ticket::class);
     }
 
     // relacionamento do comentário com o usuário que comentou
-    public function user() {
+    public function user()
+    {
         return $this->belongsTo(User::class);
     }
 }

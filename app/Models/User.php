@@ -31,17 +31,20 @@ class User extends Authenticatable
     }
 
     // relacionamento: um usuario pode abrir varios tickets
-    public function tickets() {
+    public function tickets()
+    {
         return $this->hasMany(Ticket::class);
     }
 
     // relacionamento: usuário pode ta atribuido a varios tickets
-    public function assignedTickets() {
+    public function assignedTickets()
+    {
         return $this->hasMany(Ticket::class, 'assigned_to');
     }
 
     // relacionamento: um cliente pode realizar varios comentários
-    public function comments() {
+    public function comments()
+    {
         return $this->hasMany(Comment::class);
     }
 }

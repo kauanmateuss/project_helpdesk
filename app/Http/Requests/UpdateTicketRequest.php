@@ -30,7 +30,7 @@ class UpdateTicketRequest extends FormRequest
             'description' => ['required', 'string', 'min:10'],
             'category' => ['required', Rule::enum(TicketCategory::class)],
             'priority' => ['required', Rule::enum(TicketPriority::class)],
-            
+
             // 'category' => ['required', 'in:geral,hardware,software,rede'],
             // 'priority' => ['required', 'string', 'in:baixa,media,alta,urgente'],
 
