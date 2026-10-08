@@ -7,6 +7,12 @@ use App\Models\User;
 
 class CommentPolicy
 {
+    // permite usuário admin realizar quase tudo
+    public function before(User $user): ?bool
+    {
+        return $user->isAdmin() ? true : null;
+    }
+
     /**
      * Determine whether the user can view any models.
      */

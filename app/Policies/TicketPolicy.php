@@ -7,6 +7,14 @@ use App\Models\User;
 
 class TicketPolicy
 {
+    // Roda antes de qualquer outro método da policy
+    // quando retorna null, vai fazer as outras verificações
+
+    public function before(User $user): ?bool
+    {
+        return $user->isAdmin() ? true : null;  // Só o usuário admin entra e os outros vão para as outras verificações
+    }
+
     /**
      * Determine whether the user can view any models.
      */
