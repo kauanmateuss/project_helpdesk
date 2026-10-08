@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TicketController;
@@ -7,7 +8,7 @@ use Illuminate\Support\Facades\Route;
 
 
 // Rotas publicas
-Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('welcome');
 Route::get('/sobre', [HomeController::class, 'sobre'])->name('sobre');
 
 
@@ -29,6 +30,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::resource('tickets', TicketController::class);
 
+    // rotas para comentários: store e destroy
+    Route::post('/tickets/{ticket}/comments', [CommentController::class, 'store'])->name('comments.store');
+    Route::delete('/comments/{comment}', [CommentController::class, 'destroy'])->name('comments.destroy');
+
+    // Rotas de perfil
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');

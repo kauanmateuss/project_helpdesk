@@ -2,8 +2,11 @@
 
 namespace App\Http\Requests;
 
+use App\Enums\TicketCategory;
+use App\Enums\TicketPriority;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StoreTicketRequest extends FormRequest
 {
@@ -25,8 +28,10 @@ class StoreTicketRequest extends FormRequest
         return [
             'title' => ['required', 'string', 'max:255'],
             'description' => ['required', 'string', 'min:10'],
-            'category' => ['required', 'in:geral,hardware,software,rede'],
-            'priority' => ['required', 'string', 'in:baixa,media,alta,urgente'],
+            'category' => ['required', Rule::enum(TicketCategory::class)],
+            'priority' => ['required', Rule::enum(TicketPriority::class)],
+            // 'category' => ['required', 'in:geral,hardware,software,rede'],
+            // 'priority' => ['required', 'string', 'in:baixa,media,alta,urgente'],
         ];
     }
 

@@ -15,10 +15,13 @@ class TicketController extends Controller
     public function index()
     {
         // Exibir todos os tickets, com paginação e ordenados do mais recente para o mais antigo
-        $tickets = Ticket::where('user_id', auth()->id())
-            ->with('user')
-            ->latest()
-            ->paginate(10);
+        // $tickets = Ticket::where('user_id', auth()->id())
+        //     ->with('user')
+        //     ->latest()
+        //     ->paginate(10);
+
+        // retornando como orientado por igor
+        $tickets = auth()->user()->tickets()->with('user')->latest()->paginate(10);
 
         return view('tickets.index', compact('tickets'));
     }
@@ -36,8 +39,9 @@ class TicketController extends Controller
      */
     public function store(StoreTicketRequest $request)
     {
+        $data = $request->validated();
         // Criando o ticket com o usuário logado
-        $ticket = auth()->user()->tickets()->create($request->validated());
+        $ticket = auth()->user()->tickets()->create($data);
 
         // QUando criado, redireciona para a pagina show
         return redirect()
@@ -50,7 +54,10 @@ class TicketController extends Controller
      */
     public function show(Ticket $ticket)
     {
+        // verifica se o usuário é autorizado a ver esse ticket
         Gate::authorize('view', $ticket);
+
+        $ticket->load(['user', 'assignee', 'comments.user']);
 
         return view('tickets.show', compact('ticket'));  // vai para a pagina de mostrar o registro ticket
     }
